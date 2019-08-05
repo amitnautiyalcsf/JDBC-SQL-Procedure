@@ -1,0 +1,33 @@
+
+Here i am fetching the allowance of a employee using his employee id.
+
+
+
+To create: 
+----------
+
+
+DELIMITER $$
+
+drop procedure myproc
+$$
+
+
+create procedure myproc(
+IN empid int,
+OUT allow int
+)
+
+begin
+declare dpt varchar(10);
+declare ln varchar(10);
+select e.dept into dpt from emp e where e.eid=empid;
+select d.location into ln from dept d where d.did=dpt;
+select l.city_allowance into allow from location l where l.id=ln;
+end;
+$$
+
+
+call myproc('122',@nm);
+select @nm;
+$$
